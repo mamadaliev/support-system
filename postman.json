@@ -1,0 +1,375 @@
+{
+    "info": {
+        "name": "support-system-api",
+        "_postman_id": "58edff76-9a4b-44e4-9d94-6952ea415558",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Authentication",
+            "item": [
+                {
+                    "name": "Sign Up",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "pm.test(\"Successful sign-uo and saving token to collection variables\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "    pm.expect(pm.response.json()).to.have.property('token');",
+                                    "    pm.environment.set(\"token\", JSON.parse(responseBody).token)",
+                                    "});",
+                                    ""
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/auth/sign-up",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "v1",
+                                "auth",
+                                "sign-up"
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"firstName\": \"John2\",\n    \"lastName\": \"Doe\",\n    \"username\": \"john.doe2@company.com\",\n    \"password\": \"password\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Sign In",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "pm.test(\"Successful sign-in and saving token to collection variables\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "    pm.expect(pm.response.json()).to.have.property('token');",
+                                    "    pm.environment.set(\"token\", JSON.parse(responseBody).token)",
+                                    "});",
+                                    ""
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/auth/sign-in",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "v1",
+                                "auth",
+                                "sign-in"
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"john.doe@company.com\",\n    \"password\": \"password\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Authorization",
+            "item": [
+                {
+                    "name": "Get Current User",
+                    "request": {
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/users/me",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "v1",
+                                "users",
+                                "me"
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [],
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get all users",
+                    "request": {
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/users",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "v1",
+                                "users"
+                            ]
+                        },
+                        "method": "GET",
+                        "header": []
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Requests",
+            "item": [
+                {
+                    "name": "Get All Requests",
+                    "request": {
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/requests",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "v1",
+                                "requests"
+                            ]
+                        },
+                        "method": "GET",
+                        "header": []
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Request By ID",
+                    "request": {
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/requests/75c4b5d9-7ae6-4def-902c-9c265088b401",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "v1",
+                                "requests",
+                                "75c4b5d9-7ae6-4def-902c-9c265088b401"
+                            ]
+                        },
+                        "method": "GET",
+                        "header": []
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create Request",
+                    "request": {
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/requests",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "v1",
+                                "requests"
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Request Name\",\n    \"description\": \"Request Description\",\n    \"priority\": \"HIGH\",\n    \"authorId\": \"2c535533-a54e-4ef1-b770-79b709e2d133\",\n    \"assignerId\": \"2c535533-a54e-4ef1-b770-79b709e2d133\",\n    \"dueDate\": \"2024-04-15T10:15:30\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Request",
+                    "request": {
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/requests/75c4b5d9-7ae6-4def-902c-9c265088b401",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "v1",
+                                "requests",
+                                "75c4b5d9-7ae6-4def-902c-9c265088b401"
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Request Name\",\n    \"description\": \"Request Description\",\n    \"priority\": \"HIGH\",\n    \"authorId\": \"3d850d19-2c94-494b-8ce0-db62b6fb7a3a\",\n    \"assignerId\": \"3d850d19-2c94-494b-8ce0-db62b6fb7a3a\",\n    \"dueDate\": \"2024-04-15T10:15:30\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Request",
+                    "request": {
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/requests/75c4b5d9-7ae6-4def-902c-9c265088b401",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "v1",
+                                "requests",
+                                "75c4b5d9-7ae6-4def-902c-9c265088b401"
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": []
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Dictionary",
+            "item": [
+                {
+                    "name": "Get Request Priorities",
+                    "request": {
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/dictionary/priorities",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "v1",
+                                "dictionary",
+                                "priorities"
+                            ]
+                        },
+                        "method": "GET",
+                        "header": []
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Request Statuses",
+                    "request": {
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/dictionary/statuses",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "v1",
+                                "dictionary",
+                                "statuses"
+                            ]
+                        },
+                        "method": "GET",
+                        "header": []
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get User Roles",
+                    "request": {
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/dictionary/roles",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "v1",
+                                "dictionary",
+                                "roles"
+                            ]
+                        },
+                        "method": "GET",
+                        "header": []
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "event": [],
+    "variable": [
+        {
+            "key": "token",
+            "type": "default"
+        }
+    ]
+}
